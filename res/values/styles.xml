@@ -1,5 +1,13 @@
 <resources>
 
     <style name="AppTheme" parent="android:Theme.Light" />
+    
+    <style name="layout">
+        <item name="android:background">#f3614a</item>
+    </style>
+    
+    <style name="childRowlayout">
+        <item name="android:background">#ffffff</item>
+    </style>
 
 </resources>

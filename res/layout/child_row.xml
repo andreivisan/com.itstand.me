@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/childRowlayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="40dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:paddingLeft="40dp"
+    tools:context=".MainActivity" >
     
 	<TextView 
 		android:id="@+id/grp_child"
         android:paddingLeft="50dp"
         android:focusable="false"
-        android:textSize="14dp"
+        android:textSize="20dp"
         android:textStyle="normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

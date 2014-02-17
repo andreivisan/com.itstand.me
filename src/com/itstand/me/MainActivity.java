@@ -11,13 +11,18 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.ExpandableListActivity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.SimpleExpandableListAdapter;
+import android.widget.TextView;
 
 @SuppressLint("SetJavaScriptEnabled")
 public class MainActivity extends ExpandableListActivity {
@@ -31,7 +36,7 @@ public class MainActivity extends ExpandableListActivity {
 	        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 	        StrictMode.setThreadPolicy(policy); 
 	        
-	        SimpleExpandableListAdapter expListAdapter =
+	        ExpandableListAdapter expListAdapter =
 	                new SimpleExpandableListAdapter(this,
 							                        createGroupList(),              // Creating group List.
 							                        R.layout.group_row,             // Group item layout XML.
@@ -40,7 +45,26 @@ public class MainActivity extends ExpandableListActivity {
 							                        createChildList(),              // childData describes second-level entries.
 							                        R.layout.child_row,             // Layout for sub-level entries(second level).
 							                        new String[] {"Sub Item"},      // Keys in childData maps to display.
-							                        new int[] { R.id.grp_child});   // Data under the keys above go into these TextViews.
+							                        new int[] { R.id.grp_child}){   // Data under the keys above go into these TextViews.
+	        	@Override
+                public View getChildView(int groupPosition, int childPosition,
+                        				 boolean isLastChild, View convertView, ViewGroup parent) {
+                    TextView myChildView = (TextView)super.getChildView(groupPosition, childPosition, isLastChild,convertView, parent).findViewById(R.id.grp_child);
+                    Typeface oswaldFont = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Regular.ttf");
+                    myChildView.setTypeface(oswaldFont);
+                    myChildView.setTextColor(Color.parseColor("#fbc1b6"));
+                    return myChildView;
+                }
+
+                @Override
+                public View getGroupView(int groupPosition, boolean isExpanded,
+                        				 View convertView, ViewGroup parent) {
+                    TextView myGroupView = (TextView)super.getGroupView(groupPosition, isExpanded, convertView, parent).findViewById(R.id.row_name);
+                    Typeface oswaldFont = Typeface.createFromAsset(getAssets(), "fonts/Oswald-Bold.ttf");
+                    myGroupView.setTypeface(oswaldFont);
+                    return myGroupView;
+                }
+	        };   
 	        
 	        final ExpandableListView listView = this.getExpandableListView();
 	        
